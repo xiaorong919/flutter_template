@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
@@ -34,7 +33,7 @@ class SettingsController extends GetxController {
     String themeText = box.read('theme') ?? 'system';
     try {
       themeMode =
-          ThemeMode.values.firstWhere((e) => describeEnum(e) == themeText);
+          ThemeMode.values.firstWhere((e) => e.name == themeText);
     } catch (e) {
       themeMode = ThemeMode.system;
     }

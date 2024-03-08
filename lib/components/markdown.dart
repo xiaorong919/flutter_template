@@ -12,7 +12,8 @@ class Markdown extends StatelessWidget {
     final isDark = Theme.of(context).brightness == Brightness.dark;
     final config =
         isDark ? MarkdownConfig.darkConfig : MarkdownConfig.defaultConfig;
-    codeWrapper(child, text) => CodeWrapperWidget(child: child, text: text);
+    codeWrapper(child, text, language) =>
+        CodeWrapperWidget(child, text, language);
     return SelectionArea(
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -20,9 +21,9 @@ class Markdown extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: MarkdownGenerator(
-              inlineSyntaxes: [LatexSyntax()],
-              generators: [latexGenerator],
-              config: config.copy(configs: [
+              inlineSyntaxList: [LatexSyntax()],
+              generators: [latexGenerator]
+            ).buildWidgets(text, config: config.copy(configs: [
                 isDark
                     ? PreConfig.darkConfig.copy(wrapper: codeWrapper)
                     : const PreConfig().copy(wrapper: codeWrapper),
@@ -31,8 +32,7 @@ class Markdown extends StatelessWidget {
                           scrollDirection: Axis.horizontal,
                           child: table,
                         )),
-              ]),
-            ).buildWidgets(text)),
+              ]))),
       ),
     );
   }

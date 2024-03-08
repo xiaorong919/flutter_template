@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 class CodeWrapperWidget extends StatefulWidget {
   final Widget child;
   final String text;
+  final String language;
 
-  const CodeWrapperWidget({Key? key, required this.child, required this.text})
+  const CodeWrapperWidget(this.child, this.text, this.language, {Key? key})
       : super(key: key);
 
   @override
